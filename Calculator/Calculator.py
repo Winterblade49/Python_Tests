@@ -4,29 +4,19 @@ import json
 Calc_Width = 250
 Calc_Height = 400
 
-row = 1
-column = 1
+
 
 class Calc_Buttons(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.pack()
+        self.pack()  
         
-    def Create_button(self,Button_Name):
+    def Create_button(self,Button_Name,):
         # Creates a button
-        
         self.button = tk.Button(self, text=Button_Name, command= lambda name=Button_Name: self.button_clicked(name) )
-        self.button.grid(row=self.row, column=self.column)
-        
-        row + 1 
-        
-        if row == 3:
-            column + 1
-            row = 1
-        
-        print(row)
-        print(column)
-    
+        self.button.grid(row=1,column=1)
+
+
     
     def button_clicked(self,name):
         print(name)
@@ -49,6 +39,8 @@ class App(tk.Frame):
         #creates all operand buttons   
         Operands = ("x","y","-","+",)    
         for value in Operands:
+            i = 0
+            i+1
             Buttons.Create_button(value)
         
         
