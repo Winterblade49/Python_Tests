@@ -25,10 +25,17 @@ class App(tk.Frame):
         super().__init__(master)
         self.pack()
         
+        #def instance od Calc buttons class
         Buttons = Calc_Buttons(self)
-    
+
+        #creates all 9 number buttons
         for i in range(0,10,1):
             Buttons.Create_button(i,Buttons.button_clicked)
+            
+        #creates all operand buttons   
+        Operands = ("x","y","-","+",)    
+        for value in Operands:
+            Buttons.Create_button(value,Buttons.button_clicked)
         
         
 
