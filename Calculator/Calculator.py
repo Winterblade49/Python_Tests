@@ -9,18 +9,16 @@ class App(tk.Frame):
         super().__init__(master)
         self.pack()
         
-        # Create a label
-        self.label = tk.Label(self, text="This is a label")
-        self.label.pack()
         
         # Create a button
-        self.button = tk.Button(self, text="1", command=self.button_clicked)
+        self.button = tk.Button(self, text="1", command=self.button_clicked1)
         self.button.pack()
-
-    def button_clicked(self):
-        print("Button clicked!")
-
-# create the application
+        
+    def button_clicked1(self):
+        print("Button 1 clicked!")
+        
+        
+        # create the application
 myapp = App()
 
 #
@@ -31,19 +29,13 @@ myapp.master.minsize(Calc_Width, Calc_Height)
 myapp.master.maxsize(Calc_Width, Calc_Height)
 
 #change window Icon
-myapp.master.iconbitmap('Images/Calculator Icon.png')
+myapp.master.iconbitmap('Calculator/Images/Calculator_Icon.ico')
 
 # start the program
 myapp.mainloop()
 
 
-
-
-
-
-
-
-
-
-
-
+class Calc_Button(App):
+    def __init__(self):
+        print ("Button")
+        
