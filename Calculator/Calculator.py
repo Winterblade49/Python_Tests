@@ -1,26 +1,39 @@
 import tkinter as tk
-import _json
+import json
 
 Calc_Width = 250
 Calc_Height = 400
+
+class Calc_Buttons(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.pack()
+        
+    def Create_button(self,Button_Name,Button_Command):
+        # Creates a button
+        self.button = tk.Button(self, text=Button_Name, command= lambda name=Button_Name: self.button_clicked(name))
+        self.button.pack()
+    
+    def button_clicked(self,name):
+        print(name)
+            
+
+
 
 class App(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.pack()
         
-        
-        # Create a button
-        self.button = tk.Button(self, text="1", command=self.button_clicked1)
-        self.button.pack()
-        
-    def button_clicked1(self):
-        print("Button 1 clicked!")
+        Buttons = Calc_Buttons(self)
+    
+        for i in range(0,10,1):
+            Buttons.Create_button(i,Buttons.button_clicked)
         
         
-        # create the application
-myapp = App()
 
+# create the application        
+myapp = App()
 #
 # here are method calls to the window manager class
 #
@@ -30,12 +43,6 @@ myapp.master.maxsize(Calc_Width, Calc_Height)
 
 #change window Icon
 myapp.master.iconbitmap('Calculator/Images/Calculator_Icon.ico')
-
 # start the program
 myapp.mainloop()
 
-
-class Calc_Button(App):
-    def __init__(self):
-        print ("Button")
-        
