@@ -2,24 +2,10 @@ import tkinter as tk
 import json
 
 Calc_Width = 250
-Calc_Height = 400
+Calc_Height = 500
 
 
-
-class Calc_Buttons(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack()  
-        
-    def Create_button(self,Button_Name,row=0,colum=0,button_size=2):
-        # Creates a button
-        self.button = tk.Button(self, text=Button_Name, command= lambda name=Button_Name: self.button_clicked(name),font=("Helvetica", button_size),width=2)
-        self.button.grid(row=row,column=colum)
-
-
-    
-    def button_clicked(self,name):
-        print(name)
+            
             
 
 
@@ -32,8 +18,7 @@ class App(tk.Frame):
         # Create an input field at the top
         self.input_field = tk.Entry(self, width=10, font=("Helvetica", 24))
         self.input_field.pack(side=tk.TOP)
-        
-        
+ 
         #def instance od Calc buttons class
         Buttons = Calc_Buttons(self)
 
@@ -55,8 +40,51 @@ class App(tk.Frame):
         for value in Operands:
             Buttons.Create_button(value,row, 3, button_size = 24)
             row += 1
+            
+        #Creates = button
+            Buttons.Create_button("=",4,2,24)
+        #Creates . (decimal) button
+            Buttons.Create_button(".",4,0,24)
+        #Creates delete button 
+            Buttons.Create_button("delete",5,0,24,4,10)
+            
+    
         
         
+class Calc_Buttons(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.pack()  
+        
+    def Create_button(self,Button_Name,row=0,colum=0,button_size=2,colum_span=1,width=2):
+        # Creates a button
+        self.button = tk.Button(self, text=Button_Name, command= lambda name=Button_Name: self.button_clicked(name),font=("Helvetica", button_size),width=width)
+        self.button.grid(row=row,column=colum,columnspan=colum_span)
+
+    def Update_inputfield(self,name):
+        print("updated feild with:"+ str(name))
+        
+    
+    def button_clicked(self,name):
+        print(name)
+        if name in [0,1,2,3,4,5,6,7,8,9]:
+            self.Update_inputfield(name)
+            print("number")
+        elif name in ["x","/","+","-",]:
+            self.Update_inputfield(name)
+            print("operand")
+        elif name == ".":
+            self.Update_inputfield(name)
+            print("decimal")
+        elif name == "delete":
+            print("delete")
+        elif name == "=":
+            print("run clac")
+        else:
+            print("Calc Error Button not in Registry check button clicked def in Calc buttons class")
+            
+            
+            
 
 
 
