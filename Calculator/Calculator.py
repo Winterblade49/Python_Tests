@@ -4,7 +4,6 @@ import json
 Calc_Width = 250
 Calc_Height = 500
 
-
             
             
 
@@ -60,6 +59,30 @@ class Calc_Buttons(tk.Frame):
         # Creates a button
         self.button = tk.Button(self, text=Button_Name, command= lambda name=Button_Name: self.button_clicked(name),font=("Helvetica", button_size),width=width)
         self.button.grid(row=row,column=colum,columnspan=colum_span)
+        
+    #updates jason with numbers and operators for current calculation
+    def Update_Current_Calc_Json(self,AddCalc = 0,Delete = False):
+        
+        with open('Calculator/CalcData.json','r') as f:
+            Calc_data = json.load(f)
+        
+        if Delete == False:
+            print("updated json")
+            
+            
+            Calc_data['Current Calculation'].append(AddCalc)
+            
+            with open('Calculator/CalcData.json', 'w') as f:
+                json.dump(Calc_data, f, indent=4)
+        elif Delete == True:
+            deleted_calc = Calc_data['Current Calculation'].pop()
+            
+            with open('Calculator/CalcData.json', 'w') as f:
+                json.dump(Calc_data, f, indent=4)
+                print(f"Deleted: {deleted_calc}")
+                
+            
+        
 
     def Update_inputfield(self,name):
         print("updated feild with:"+ str(name))
@@ -70,14 +93,19 @@ class Calc_Buttons(tk.Frame):
         if name in [0,1,2,3,4,5,6,7,8,9]:
             self.Update_inputfield(name)
             print("number")
+            self.Update_Current_Calc_Json(str(name))
+            
         elif name in ["x","/","+","-",]:
             self.Update_inputfield(name)
             print("operand")
+            self.Update_Current_Calc_Json(str(name))
         elif name == ".":
             self.Update_inputfield(name)
             print("decimal")
+            self.Update_Current_Calc_Json(str(name))
         elif name == "delete":
             print("delete")
+            self.Update_Current_Calc_Json(0,True)
         elif name == "=":
             print("run clac")
         else:
